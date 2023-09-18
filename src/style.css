@@ -1,0 +1,12 @@
+.container {
+    width: 900px;
+    margin: 0 auto;
+}
+
+div.dataTables_wrapper {
+  width: 100%;
+  margin-top: 1em;
+}
+thead input {
+        width: 100%;
+    }
