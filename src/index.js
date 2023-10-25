@@ -7,8 +7,27 @@ new DateTime('#mindt', {
   format: 'YYYY/MM/DD'
 });
 
+function toM(s) {
+  return moment(s.replace('上午', 'AM').replace('下午', 'PM'), "A hh:mm:ss");
+}
+function hours(from, to) {
+  return (toM(to) - toM(from))/3600000;
+}
+
 function showData(dataArray) {
+  // Append data with only 5 cells with a empty cell
   dataArray = dataArray.map(function(data) {return data.length == 5 ? data.concat(['']) : data;});
+  // Add row index
+  for (let i = 0; i < dataArray.length; i++) {
+    dataArray[i].splice(0, 0, i+2);
+  }
+  // Add service length col
+  dataArray = dataArray.map(function(data) {
+    if (typeof data[4] != 'number')
+      data.splice(5, 0, hours(data[3], data[4]));
+    return data;
+  });
+
   $(document).ready(function () {
     $('#example thead tr')
       .clone(true)
@@ -19,12 +38,14 @@ function showData(dataArray) {
       data: dataArray,
       //CHANGE THE TABLE HEADINGS BELOW TO MATCH WITH YOUR SELECTED DATA RANGE
       columns: [
+        { title: "ID" },
         { title: "姓名" },
         { title: "日期", render: function(data, type) {
           return type === 'sort' ? moment(data, 'YYYY/MM/DD') : moment(data, 'YYYY/MM/DD').format('YYYY/MM/DD');
         }},
         { title: "開始時間"},
         { title: "結束時間" },
+        { title: "時長", render: function(data, type) {return data.toFixed(1);}},
         { title: "服務事由" },
         { title: "備註" }
       ],
