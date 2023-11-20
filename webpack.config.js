@@ -15,6 +15,9 @@ const config = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         clean: true,
+        filename: '[hash].js',
+        filename: '[hash].js',
+        chunkFilename: '[chunkhash].js',
     },
     plugins: [
         new HtmlWebpackPlugin({
