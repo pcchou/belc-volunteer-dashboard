@@ -76,9 +76,9 @@ $(document).ready(function () {
     });
 });
 
-$.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+$.fn.dataTable.ext.search.push(function (settings, data, dataIndex, rowData, counter) {
   let min = moment(minDt.value, 'YYYY/MM/DD');
-  let date = moment(data[1], 'YYYY/MM/DD') || 0; // use data for the age column
+  let date = moment(data[2], 'YYYY/MM/DD') || 0; // use data for the age column
 
   if (
     isNaN(min) ||
