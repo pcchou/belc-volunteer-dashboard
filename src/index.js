@@ -49,7 +49,7 @@ function showData(dataArray) {
         { title: "服務事由" },
         { title: "備註" }
       ],
-      order: [[1, 'desc'], [2, 'incr']],
+      order: [[2, 'desc'], [3, 'incr']],
       pageLength: 15,
       lengthMenu: [0, 15, 30, 50, 100]
     })
